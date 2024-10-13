@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import processImage from '../assets/images/company.jpg';
 
 const Inquiry = () => (
   <div className="container mx-auto p-4">
