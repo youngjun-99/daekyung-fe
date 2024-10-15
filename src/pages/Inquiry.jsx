@@ -179,7 +179,7 @@ const TextArea = styled.textarea`
 `;
 
 const AgreementSection = styled.div`
-  background-color: ${(props) => props.theme.colors.gray[100]};
+  background-color: #f7f7fb;
   padding: 1rem;
   border-radius: 0.25rem;
   max-height: 200px;
@@ -297,22 +297,18 @@ const Inquiry = () => {
               </InputGroup>
               <InputGroup>
                 <InputLabel>이메일</InputLabel>
-                <Input
-                  type="email"
-                  placeholder="(-) 없이 숫자만 입력해 주세요."
-                  required
-                />
+                <Input type="email" placeholder="email@example.com" required />
               </InputGroup>
             </CustomerInfoGrid>
           </Section>
 
           <Section>
-            <SectionTitle>문의 사항</SectionTitle>
+            <SectionTitle>문의사항</SectionTitle>
             <TextArea placeholder="문의사항을 입력해 주세요." required />
           </Section>
 
           <Section>
-            <SectionTitle>약관 동의</SectionTitle>
+            <SectionTitle>약관동의</SectionTitle>
             <AgreementSection>
               <AgreementContent>
                 {`<(주)대경인쇄>(이하 '회사')는 고객문의 서비스 제공을 위해 「개인정보 보호법」 제15조 제1항
@@ -339,7 +335,7 @@ const Inquiry = () => {
               checked={requestCatalog}
               onChange={() => setRequestCatalog(!requestCatalog)}
             />
-            <Body1>카탈로그 요청하기</Body1>
+            <Body1>카달로그 요청하기</Body1>
           </CheckboxContainer>
 
           <SubmitButton type="submit">문의하기</SubmitButton>

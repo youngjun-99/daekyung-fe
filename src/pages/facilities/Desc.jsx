@@ -80,7 +80,7 @@ const Desc = () => {
       equipment: ["드라이 (용제,무용제)", "T-다이 (1액형, 2액형)"],
       ea: [1, 1],
     },
-    { process: "스리팅", equipment: "슬리터기", ea: 1 },
+    { process: "스레팅", equipment: "슬리터기", ea: 1 },
     { process: "가공", equipment: "가공기", ea: 3 },
   ];
 
