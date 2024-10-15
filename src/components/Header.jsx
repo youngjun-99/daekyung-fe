@@ -3,23 +3,24 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { Body1, Button2 } from "../styles/Typography";
 import logoImage from "../assets/images/daekyung-logo.png";
+import catalogFile from "/src/assets/file/catalog.pdf";
 
 const HeaderWrapper = styled.header`
-  background-color: ${(props) => props.theme.colors.gray[0]};
+  background-color: ${({ theme }) => theme.colors.gray[0]};
 `;
 
 const Container = styled.div`
-  padding: 1rem 10rem; // 좌우 패딩을 5rem으로 설정
+  padding: 1rem 10rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-    padding: 1rem 2rem; // 화면이 작아질 때 패딩 줄임
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding: 1rem 2rem;
   }
 
-  @media (max-width: ${(props) => props.theme.breakpoints.md}) {
-    padding: 1rem; // 모바일 화면에서 더 작은 패딩
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 1rem;
   }
 `;
 
@@ -30,17 +31,17 @@ const Logo = styled.img`
 `;
 
 const HamburgerButton = styled.button`
-  color: ${(props) => props.theme.colors.gray[700]};
+  color: ${({ theme }) => theme.colors.gray[700]};
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
   margin-right: 1rem;
   &:hover {
-    color: ${(props) => props.theme.colors.gray[900]};
+    color: ${({ theme }) => theme.colors.gray[900]};
   }
 
-  @media (min-width: ${(props) => props.theme.breakpoints.md}) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     display: none;
   }
 `;
@@ -48,7 +49,7 @@ const HamburgerButton = styled.button`
 const DesktopNav = styled.nav`
   display: none;
 
-  @media (min-width: ${(props) => props.theme.breakpoints.md}) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -65,17 +66,17 @@ const NavList = styled.ul`
 `;
 
 const NavItem = styled(Body1)`
-  font-weight: ${(props) => props.theme.fontWeights.semibold};
-  color: ${(props) => props.theme.colors.gray[900]};
+  font-weight: ${({ theme }) => theme.fontWeights.semibold};
+  color: ${({ theme }) => theme.colors.gray[900]};
 
   &:hover {
-    color: ${(props) => props.theme.colors.gray[700]};
+    color: ${({ theme }) => theme.colors.gray[700]};
   }
 `;
 
 const CatalogButton = styled(Button2)`
-  background-color: ${(props) => props.theme.colors.primary.DEFAULT};
-  color: ${(props) => props.theme.colors.gray[0]};
+  background-color: ${({ theme }) => theme.colors.primary.DEFAULT};
+  color: ${({ theme }) => theme.colors.gray[0]};
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   transition: background-color 0.3s;
@@ -83,12 +84,12 @@ const CatalogButton = styled(Button2)`
   white-space: nowrap;
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.primary[600]};
+    background-color: ${({ theme }) => theme.colors.primary[600]};
   }
 `;
 
 const MobileNav = styled.nav`
-  @media (min-width: ${(props) => props.theme.breakpoints.md}) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     display: none;
   }
 `;
@@ -101,17 +102,19 @@ const MobileNavList = styled.ul`
 `;
 
 const MobileNavItem = styled(Body1)`
-  color: ${(props) => props.theme.colors.gray[700]};
-  font-weight: ${(props) => props.theme.fontWeights.medium};
+  color: ${({ theme }) => theme.colors.gray[700]};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
 
   &:hover {
-    color: ${(props) => props.theme.colors.gray[900]};
+    color: ${({ theme }) => theme.colors.gray[900]};
   }
 `;
 
 const RightSection = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  width: 200px; // 버튼이 없을 때도 동일한 공간 확보
 `;
 
 const Header = () => {
@@ -121,14 +124,21 @@ const Header = () => {
   const isHomePage = location.pathname === "/";
 
   const handleDownload = () => {
-    const fileUrl = "src/assets/file/catalog.pdf";
     const link = document.createElement("a");
-    link.href = fileUrl;
+    link.href = catalogFile;
     link.setAttribute("download", "catalog.pdf");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
+
+  const navItems = [
+    { to: "/about", text: "회사소개" },
+    { to: "/process", text: "공정과정" },
+    { to: "/products", text: "제품소개" },
+    { to: "/facilities", text: "설비소개" },
+    { to: "/inquiry", text: "고객문의" },
+  ];
 
   return (
     <HeaderWrapper>
@@ -140,31 +150,13 @@ const Header = () => {
         />
         <DesktopNav>
           <NavList>
-            <li>
-              <NavItem as={Link} to="/about">
-                회사소개
-              </NavItem>
-            </li>
-            <li>
-              <NavItem as={Link} to="/process">
-                공정과정
-              </NavItem>
-            </li>
-            <li>
-              <NavItem as={Link} to="/products">
-                제품소개
-              </NavItem>
-            </li>
-            <li>
-              <NavItem as={Link} to="/facilities">
-                설비소개
-              </NavItem>
-            </li>
-            <li>
-              <NavItem as={Link} to="/inquiry">
-                고객문의
-              </NavItem>
-            </li>
+            {navItems.map((item) => (
+              <li key={item.to}>
+                <NavItem as={Link} to={item.to}>
+                  {item.text}
+                </NavItem>
+              </li>
+            ))}
           </NavList>
         </DesktopNav>
         <RightSection>
@@ -177,21 +169,7 @@ const Header = () => {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M3 12H21"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M3 6H21"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M3 18H21"
+                d="M3 12H21M3 6H21M3 18H21"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
@@ -209,31 +187,13 @@ const Header = () => {
       {isMenuOpen && (
         <MobileNav>
           <MobileNavList>
-            <li>
-              <MobileNavItem as={Link} to="/about">
-                회사소개
-              </MobileNavItem>
-            </li>
-            <li>
-              <MobileNavItem as={Link} to="/process">
-                공정과정
-              </MobileNavItem>
-            </li>
-            <li>
-              <MobileNavItem as={Link} to="/products">
-                제품소개
-              </MobileNavItem>
-            </li>
-            <li>
-              <MobileNavItem as={Link} to="/facilities">
-                설비소개
-              </MobileNavItem>
-            </li>
-            <li>
-              <MobileNavItem as={Link} to="/inquiry">
-                고객문의
-              </MobileNavItem>
-            </li>
+            {navItems.map((item) => (
+              <li key={item.to}>
+                <MobileNavItem as={Link} to={item.to}>
+                  {item.text}
+                </MobileNavItem>
+              </li>
+            ))}
           </MobileNavList>
         </MobileNav>
       )}

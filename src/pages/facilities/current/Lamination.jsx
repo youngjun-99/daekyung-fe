@@ -1,6 +1,5 @@
 import { React, useState } from "react";
 import styled from "styled-components";
-import { Headline1 } from "/src/styles/Typography";
 import dryImage from "/src/assets/images/facilities/lamination/dry.png";
 import tdieImage from "/src/assets/images/facilities/lamination/tdie.png";
 import Dry from "./lamination/Dry";
@@ -85,7 +84,6 @@ const TabButton = styled.button`
   width: 30%;
   border-radius: 0.5rem;
   border: none;
-  cursor: pointer;
 `;
 
 const TabContent = styled.div`

@@ -1,6 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import ninecolorImage from "/src/assets/images/facilities/preprint/ninecolor.png";
+import add1 from "/src/assets/images/facilities/preprint/01.jpg";
+import add2 from "/src/assets/images/facilities/preprint/02.jpg";
+import add3 from "/src/assets/images/facilities/preprint/03.jpg";
+import add4 from "/src/assets/images/facilities/preprint/04.jpg";
+import add5 from "/src/assets/images/facilities/preprint/05.jpg";
 
 const OrganizationWrapper = styled.div`
   position: relative;
@@ -25,6 +30,7 @@ const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 2rem;
 `;
 
 const Image = styled.img`
@@ -38,6 +44,21 @@ const Lamination = () => {
       <Content>
         <ImageContainer>
           <Image src={ninecolorImage} alt="9도 이미지" />
+        </ImageContainer>
+        <ImageContainer>
+          <Image src={add1} alt="9도 이미지" />
+        </ImageContainer>
+        <ImageContainer>
+          <Image src={add2} alt="9도 이미지" />
+        </ImageContainer>
+        <ImageContainer>
+          <Image src={add3} alt="9도 이미지" />
+        </ImageContainer>
+        <ImageContainer>
+          <Image src={add4} alt="9도 이미지" />
+        </ImageContainer>
+        <ImageContainer>
+          <Image src={add5} alt="9도 이미지" />
         </ImageContainer>
       </Content>
     </OrganizationWrapper>

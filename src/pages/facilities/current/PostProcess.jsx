@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { Headline1 } from "/src/styles/Typography";
 import threatingMachine1 from "/src/assets/images/facilities/postprocess/machine1.png";
 import threatingMachine2 from "/src/assets/images/facilities/postprocess/machine2.png";
+import add1 from "/src/assets/images/facilities/postprocess/1.png";
+import add2 from "/src/assets/images/facilities/postprocess/2.png";
+import add3 from "/src/assets/images/facilities/postprocess/3.png";
 
 const ThreatingWrapper = styled.div`
   position: relative;
@@ -89,6 +92,15 @@ const Postprocess = () => {
         </ImageContainer>
         <ImageContainer>
           <Image src={threatingMachine2} alt="인쇄기기 2" />
+        </ImageContainer>
+        <ImageContainer>
+          <Image src={add1} alt="인쇄기기 2" />
+        </ImageContainer>
+        <ImageContainer>
+          <Image src={add2} alt="인쇄기기 2" />
+        </ImageContainer>
+        <ImageContainer>
+          <Image src={add3} alt="인쇄기기 2" />
         </ImageContainer>
       </Content>
     </ThreatingWrapper>

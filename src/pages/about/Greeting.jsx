@@ -4,6 +4,7 @@ import { Headline1, Headline2, Body1 } from "../../styles/Typography";
 import backgroundImage from "../../assets/images/ci_bg.svg";
 import signatureImage from "../../assets/images/about/signature.png";
 import signboardImage from "../../assets/images/about/signboard.png";
+import catalogFile from "/src/assets/file/catalog.pdf";
 
 const GreetingWrapper = styled.div`
   position: relative;
@@ -159,7 +160,7 @@ const DownloadButton = styled.button`
 
 const Greeting = () => {
   const handleDownload = () => {
-    const fileUrl = "src/assets/file/catalog.pdf";
+    const fileUrl = catalogFile;
     const link = document.createElement("a");
     link.href = fileUrl;
     link.setAttribute("download", "catalog.pdf");
