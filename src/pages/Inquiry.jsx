@@ -323,12 +323,12 @@ const Inquiry = () => {
           </Section>
 
           <Section>
-            <SectionTitle>문의 사항</SectionTitle>
+            <SectionTitle>문의사항</SectionTitle>
             <TextArea placeholder="문의사항을 입력해 주세요." required />
           </Section>
 
           <Section>
-            <SectionTitle>약관 동의</SectionTitle>
+            <SectionTitle>약관동의</SectionTitle>
             <AgreementSection>
               <div className="agreement-content">
                 {`<(주)대경인쇄>(이하 '회사')는 고객문의 서비스 제공을 위해 「개인정보 보호법」 제15조 제1항
@@ -348,7 +348,6 @@ const Inquiry = () => {
               <Body1>개인정보 수집 및 이용에 동의합니다. (필수)</Body1>
             </CheckboxLabel>
           </Section>
-
           <SubmitSection>
             <CatalogCheckbox as="label">
               <input
