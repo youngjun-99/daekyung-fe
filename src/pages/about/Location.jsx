@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Headline1, Headline2 } from "../../styles/Typography";
 import firstFacilityImage from "../../assets/images/about/facility1.jpg";
 import secondFacilityImage from "../../assets/images/about/facility2.jpeg";
-import firstFacilityMapImage from "../../assets/images/about/facility_map_1.png";
-import secondFacilityMapImage from "../../assets/images/about/facility_map_2.png";
 
+// Styled components remain the same
 const LocationWrapper = styled.div`
   position: relative;
 `;
@@ -40,16 +40,15 @@ const FacilitySection = styled.div`
 `;
 
 const FacilityTitle = styled(Headline2)`
-  //semibold 36px
   font-size: 2rem;
   font-weight: 600;
   text-align: center;
   margin-bottom: 2rem;
 `;
 
-const MapImage = styled.img`
+const MapContainer = styled.div`
   width: 100%;
-  height: auto;
+  height: 400px;
   margin-bottom: 2rem;
 `;
 
@@ -79,8 +78,7 @@ const Table = styled.table`
   border-bottom: 1px solid #111111;
 `;
 
-const TableTitle = styled.table`
-  //semibold 24px
+const TableTitle = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
@@ -109,23 +107,138 @@ const FacilityImage = styled.img`
   }
 `;
 
+const useNaverMapsScript = () => {
+  const [loaded, setLoaded] = React.useState(false);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src =
+      "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=77kw9m1i6r";
+    script.async = true;
+    script.onload = () => setLoaded(true);
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  return loaded;
+};
+
+const FacilityInfo = ({ title, address, phone, fax }) => (
+  <TableContainer>
+    <TableTitle>{title}</TableTitle>
+    <Table>
+      <tbody>
+        <TableRow>
+          <TableCell>주소</TableCell>
+          <TableCell>{address}</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>전화번호</TableCell>
+          <TableCell>{phone}</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>팩스번호</TableCell>
+          <TableCell>{fax}</TableCell>
+        </TableRow>
+      </tbody>
+    </Table>
+  </TableContainer>
+);
+
+FacilityInfo.propTypes = {
+  title: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
+  fax: PropTypes.string.isRequired,
+};
+
+const NaverMap = ({ location }) => {
+  const mapRef = useRef(null);
+  const scriptLoaded = useNaverMapsScript();
+
+  useEffect(() => {
+    if (scriptLoaded && mapRef.current && window.naver) {
+      const map = new window.naver.maps.Map(mapRef.current, {
+        center: new window.naver.maps.LatLng(location.lat, location.lng),
+        zoom: 18,
+        minZoom: 7,
+        zoomControl: true,
+        zoomControlOptions: {
+          position: window.naver.maps.Position.TOP_RIGHT,
+        },
+      });
+
+      new window.naver.maps.Marker({
+        position: new window.naver.maps.LatLng(location.lat, location.lng),
+        map: map,
+      });
+    }
+  }, [scriptLoaded, location]);
+
+  return <MapContainer ref={mapRef} />;
+};
+
+NaverMap.propTypes = {
+  location: PropTypes.shape({
+    lat: PropTypes.number.isRequired,
+    lng: PropTypes.number.isRequired,
+  }).isRequired,
+};
+
+const Facility = ({ facility, isLast }) => (
+  <FacilitySection isLast={isLast}>
+    <FacilityTitle>{facility.title}</FacilityTitle>
+    <NaverMap location={facility.location} />
+    <InfoContainer>
+      <FacilityInfo
+        title={facility.title}
+        address={facility.address}
+        phone={facility.phone}
+        fax={facility.fax}
+      />
+      <FacilityImage
+        src={facility.facilityImage}
+        alt={`${facility.title} 전경`}
+      />
+    </InfoContainer>
+  </FacilitySection>
+);
+
+Facility.propTypes = {
+  facility: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    facilityImage: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    fax: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      lng: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
+  isLast: PropTypes.bool.isRequired,
+};
+
 const Location = () => {
   const facilities = [
     {
       title: "제1공장",
-      mapImage: firstFacilityMapImage,
       facilityImage: firstFacilityImage,
       address: "경기도 김포시 통진읍 귀전로154번길 126-13",
       phone: "(031) 981-7847",
       fax: "(031) 988-7847",
+      location: { lat: 37.7158497, lng: 126.611975 },
     },
     {
       title: "제2공장",
-      mapImage: secondFacilityMapImage,
       facilityImage: secondFacilityImage,
       address: "경기도 김포시 통진읍 귀전로154번길 126-11",
       phone: "(031) 981-7847",
       fax: "(031) 988-7847",
+      location: { lat: 37.7163093, lng: 126.6122724 },
     },
   ];
 
@@ -133,37 +246,12 @@ const Location = () => {
     <LocationWrapper>
       <Content>
         <Title>사업장 위치</Title>
-
         {facilities.map((facility, index) => (
-          <FacilitySection key={index} isLast={index === facilities.length - 1}>
-            <FacilityTitle>{facility.title}</FacilityTitle>
-            <MapImage src={facility.mapImage} alt={`${facility.title} 지도`} />
-            <InfoContainer>
-              <TableContainer>
-                <TableTitle>{facility.title}</TableTitle>
-                <Table>
-                  <tbody>
-                    <TableRow>
-                      <TableCell>주소</TableCell>
-                      <TableCell>{facility.address}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>전화번호</TableCell>
-                      <TableCell>{facility.phone}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>팩스번호</TableCell>
-                      <TableCell>{facility.fax}</TableCell>
-                    </TableRow>
-                  </tbody>
-                </Table>
-              </TableContainer>
-              <FacilityImage
-                src={facility.facilityImage}
-                alt={`${facility.title} 전경`}
-              />
-            </InfoContainer>
-          </FacilitySection>
+          <Facility
+            key={facility.title}
+            facility={facility}
+            isLast={index === facilities.length - 1}
+          />
         ))}
       </Content>
     </LocationWrapper>
