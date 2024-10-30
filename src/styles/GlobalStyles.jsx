@@ -1,14 +1,14 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
-import PretendardBlack from '/fonts/Pretendard-Black.woff2';
-import PretendardExtraBold from '/fonts/Pretendard-ExtraBold.woff2';
-import PretendardBold from '/fonts/Pretendard-Bold.woff2';
-import PretendardSemiBold from '/fonts/Pretendard-SemiBold.woff2';
-import PretendardMedium from '/fonts/Pretendard-Medium.woff2';
-import PretendardRegular from '/fonts/Pretendard-Regular.woff2';
-import PretendardLight from '/fonts/Pretendard-Light.woff2';
-import PretendardExtraLight from '/fonts/Pretendard-ExtraLight.woff2';
-import PretendardThin from '/fonts/Pretendard-Thin.woff2';
+import PretendardBlack from "/fonts/Pretendard-Black.woff2";
+import PretendardExtraBold from "/fonts/Pretendard-ExtraBold.woff2";
+import PretendardBold from "/fonts/Pretendard-Bold.woff2";
+import PretendardSemiBold from "/fonts/Pretendard-SemiBold.woff2";
+import PretendardMedium from "/fonts/Pretendard-Medium.woff2";
+import PretendardRegular from "/fonts/Pretendard-Regular.woff2";
+import PretendardLight from "/fonts/Pretendard-Light.woff2";
+import PretendardExtraLight from "/fonts/Pretendard-ExtraLight.woff2";
+import PretendardThin from "/fonts/Pretendard-Thin.woff2";
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -126,9 +126,9 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     line-height: 1;
-    font-family: 'Pretendard', sans-serif;  /* 여기에 Pretendard를 기본 폰트로 설정 */
-    background-color: ${props => props.theme.colors.background || '#ffffff'};
-    color: ${props => props.theme.colors.text || '#000000'};
+    font-family: 'Pretendard';
+    background-color: ${(props) => props.theme.colors.background || "#ffffff"};
+    color: ${(props) => props.theme.colors.text || "#000000"};
   }
 
   ol, ul {
@@ -181,7 +181,8 @@ const GlobalStyles = createGlobalStyle`
 
   /* Additional global styles */
   ::selection {
-    background-color: ${props => props.theme.colors.primary[500] || '#0000FF'};
+    background-color: ${(props) =>
+      props.theme.colors.primary[500] || "#0000FF"};
     color: #ffffff;
   }
 
@@ -191,16 +192,16 @@ const GlobalStyles = createGlobalStyle`
   }
 
   ::-webkit-scrollbar-track {
-    background: ${props => props.theme.colors.gray[100] || '#f1f1f1'};
+    background: ${(props) => props.theme.colors.gray[100] || "#f1f1f1"};
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${props => props.theme.colors.gray[400] || '#888'};
+    background: ${(props) => props.theme.colors.gray[400] || "#888"};
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: ${props => props.theme.colors.gray[600] || '#555'};
+    background: ${(props) => props.theme.colors.gray[600] || "#555"};
   }
 `;
 
