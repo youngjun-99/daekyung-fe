@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const MainContent = styled.main`
   min-height: calc(
     2160px - 96px - 174px
-  ); // 2160px - header height - footer height
+  );
 
   @media (max-width: 740px) {
     min-height: calc(100vh - 60px - 180px);
@@ -98,7 +98,7 @@ export const FeatureSection = styled.section`
   position: relative;
   padding: 96px 24px;
   background-color: ${({ theme }) => theme.colors.gray[50]};
-  min-height: calc(1080px - 80px); // 남은 높이를 꽉 채우도록
+  min-height: calc(1080px - 80px);
 
   @media (max-width: 740px) {
     padding: 40px 16px;
@@ -164,36 +164,18 @@ export const FeatureContent = styled.div`
 `;
 
 export const FeatureTitle = styled.h3`
-  font-size: ${({ theme }) => theme.typography.title.Large.fontSize};
-  margin-bottom: 16px;
+  font-size: ${({ theme }) => theme.typography.display.Medium.fontSize};
 
   @media (max-width: 740px) {
     font-size: ${({ theme }) => theme.typography.title.Medium.fontSize};
   }
 `;
 
-export const FeatureDescription = styled.p`
-  font-size: ${({ theme }) => theme.typography.body.Medium.fontSize};
-  margin-bottom: 24px;
-  opacity: 0.9;
-
-  @media (max-width: 740px) {
-    font-size: ${({ theme }) => theme.typography.body.Small.fontSize};
-  }
-`;
-
 export const MoreButton = styled.button`
-  background: transparent;
-  border: 1px solid white;
+  background: none;
+  border: none;
   color: white;
-  padding: 8px 24px;
-  border-radius: 4px;
-  font-size: ${({ theme }) => theme.typography.label.Medium.fontSize};
+  font-size: ${({ theme }) => theme.typography.detail.Large.fontSize};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
   cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: white;
-    color: black;
-  }
 `;

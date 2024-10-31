@@ -7,8 +7,8 @@ export const theme = {
       300: "#70B2DD",
       400: "#3892CD",
       500: "#0071BC",
-      DEFAULT: "#0071BC",
-      600: "#005D9A",
+      DEFAULT: "#166CE3",
+      600: "#166CE3",
       700: "#004979",
       800: "#003458",
       900: "#002A47",
@@ -59,13 +59,7 @@ export const theme = {
     semibold: 600,
     bold: 700,
   },
-  breakpoints: {
-    sm: "640px",
-    md: "768px",
-    lg: "1024px",
-    xl: "1280px",
-    "2xl": "1920px",
-  },
+  breakpoint: "740px",
   spacing: {},
   typography: {
     display: {
@@ -110,12 +104,4 @@ export const theme = {
       XSmall: { fontSize: "13px", lineHeight: 16 },
     },
   },
-};
-
-export const media = {
-  sm: `@media (min-width: ${theme.breakpoints.sm})`,
-  md: `@media (min-width: ${theme.breakpoints.md})`,
-  lg: `@media (min-width: ${theme.breakpoints.lg})`,
-  xl: `@media (min-width: ${theme.breakpoints.xl})`,
-  "2xl": `@media (min-width: ${theme.breakpoints["2xl"]})`,
 };

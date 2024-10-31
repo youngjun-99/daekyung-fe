@@ -9,6 +9,7 @@ import PretendardRegular from "/fonts/Pretendard-Regular.woff2";
 import PretendardLight from "/fonts/Pretendard-Light.woff2";
 import PretendardExtraLight from "/fonts/Pretendard-ExtraLight.woff2";
 import PretendardThin from "/fonts/Pretendard-Thin.woff2";
+import GothamUltraItalic from "/fonts/GothamUltra-Italic.woff";
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -90,6 +91,14 @@ const GlobalStyles = createGlobalStyle`
     src: local('Pretendard Thin'), 
          url(${PretendardThin}) format('woff2'),
          url('/fonts/Pretendard-Thin.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: 'Gotham';
+    font-weight: 100;
+    font-display: swap;
+    src: local('GothamUltra Italic'), 
+         url(${GothamUltraItalic}) format('woff');
   }
 
   /* Reset CSS */

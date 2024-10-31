@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import catalogFile from "/src/assets/file/catalog.pdf";
 import DownloadIcon from "../../components/icons/DownloadIcon";
-import MainFacilityImage from "../../assets/images/home/topfacility.jpg";
+import MainFacilityImage from "../../assets/images/home/main.png";
 import ProcessImage from "../../assets/images/home/process.png";
 import ProductImage from "../../assets/images/home/product.png";
 import FacilityImage from "../../assets/images/home/facility.png";
@@ -22,7 +22,6 @@ import {
   FeatureImage,
   FeatureContent,
   FeatureTitle,
-  FeatureDescription,
   MoreButton,
 } from "./styles";
 
@@ -33,21 +32,21 @@ const Home = () => {
     {
       title: "공정과정",
       description:
-        "Lorem ipsum dolor sit amet, consectetur. Magna in tempor suscipit lacus proin lectus risus.",
+        "",
       image: ProcessImage,
       path: "/process",
     },
     {
       title: "제품소개",
       description:
-        "Lorem ipsum dolor sit amet, consectetur. Magna in tempor suscipit lacus proin lectus risus.",
+        "",
       image: ProductImage,
       path: "/products",
     },
     {
       title: "설비소개",
       description:
-        "Lorem ipsum dolor sit amet, consectetur. Magna in tempor suscipit lacus proin lectus risus.",
+        "",
       image: FacilityImage,
       path: "/facility",
     },
@@ -92,7 +91,6 @@ const Home = () => {
               <FeatureImage src={feature.image} alt={feature.title} />
               <FeatureContent>
                 <FeatureTitle>{feature.title}</FeatureTitle>
-                <FeatureDescription>{feature.description}</FeatureDescription>
                 <MoreButton>더보기</MoreButton>
               </FeatureContent>
             </FeatureCard>
